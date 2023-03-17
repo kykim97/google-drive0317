@@ -1,0 +1,68 @@
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="google.drive.mapper.FileMapper">
+    <select id="findList" resultType="file">
+        SELECT 
+            id,
+
+            name,
+
+            type,
+
+            size,
+
+            status
+        FROM file
+    </select>
+    
+    
+    <select id="findOneById" parameterType="long" resultType="file">
+        SELECT 
+            id,
+
+            name,
+
+            type,
+
+            size,
+
+            status
+        FROM file
+        WHERE id = #{id}
+    </select>
+    
+    <insert id="save" parameterType="file" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO file (
+                        name,
+                        type,
+                        size,
+                        status
+            ) 
+        VALUES (
+                        #{ name },
+                        #{ type },
+                        #{ size },
+                        #{ status }
+            )
+    </insert>
+    
+    <update id="update" parameterType="file">
+        UPDATE reservation
+        SET 
+
+            name = #{ name },
+
+            type = #{ type },
+
+            size = #{ size },
+
+            status = #{ status }
+        WHERE id = #{id}
+    </update>
+    
+    <delete id = "deleteById" parameterType="long">
+        DELETE FROM file WHERE id = #{id}
+    </delete>
+</mapper>
